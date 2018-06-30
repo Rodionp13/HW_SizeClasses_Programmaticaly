@@ -10,14 +10,16 @@
 #import "ViewController+VCMethods.h"
 
 @interface ViewController : UIViewController
-@property(copy, nonatomic) NSArray<NSLayoutConstraint*> *sharedConstraintsForViews;
+@property(copy, nonatomic) NSDictionary *sharedConstraintsForViews;
 @property(copy, nonatomic) NSArray<NSLayoutConstraint*> *constraintsForButtons;
-@property(copy, nonatomic) NSArray<NSLayoutConstraint*> *horizontalSizeClassCompactConstraints;
+@property(copy, nonatomic) NSDictionary *horizontalSizeClassRegularConstraints;
 @property(strong, nonatomic) UIView *firstView;
 @property(strong, nonatomic) UIView *sencondView;
 @property(strong, nonatomic) UIButton *firstBttn;
 @property(strong, nonatomic) UIButton *secondBttn;
-
+@property(nonatomic, assign) BOOL firstBttnIsTapped;
+@property(nonatomic, assign) BOOL secondBttnIsTapped;
+@property(nonatomic, assign) BOOL tappedFirst;
 
 @end
 

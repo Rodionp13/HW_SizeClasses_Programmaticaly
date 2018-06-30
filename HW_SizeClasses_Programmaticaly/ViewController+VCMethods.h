@@ -10,5 +10,6 @@
 
 @interface UIViewController (VCMethods)
 - (void)sizeClassDidChange;
-
+- (void) increaseConstantHeightOrWidthConstraint;
+- (void) resetProperties;
 @end

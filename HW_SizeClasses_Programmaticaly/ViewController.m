@@ -13,7 +13,6 @@
 @end
 
 @implementation ViewController
-@synthesize firstView = _firstView, sencondView = _secondView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +27,8 @@
     self.secondBttn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.secondBttn setBackgroundColor:UIColor.blueColor];
     [self.secondBttn setTitle:@"Second" forState:UIControlStateNormal];
+    [self setFirstBttnIsTapped:NO];
+    [self setSecondBttnIsTapped:NO];
     
     [self.view addSubview:self.firstView];
     [self.view addSubview:self.sencondView];
@@ -39,48 +40,56 @@
     [self.firstBttn setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.secondBttn setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    //Example
-    NSLayoutConstraint *equalHeight = [NSLayoutConstraint constraintWithItem:self.sencondView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.firstView attribute:NSLayoutAttributeHeight multiplier:1.f constant:0];
-    NSLayoutConstraint *bottomFirstView = [NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.sencondView attribute:NSLayoutAttributeTop multiplier:1.f constant:-10];
+    //Common Constraints
+    self.sharedConstraintsForViews = @{@"equalHeight":[NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.sencondView attribute:NSLayoutAttributeHeight multiplier:1.f constant:0],
+                                       @"equalWidth":[NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.sencondView attribute:NSLayoutAttributeWidth multiplier:1.f constant:0],
+                                       @"topFirstView":[NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeTop multiplier:1.f constant:10.f],
+                                       @"leadingFirstView":[NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeLeading multiplier:1.f constant:10.f],
+                                       @"leadingFirstToSecond":[NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.sencondView attribute:NSLayoutAttributeLeading multiplier:1.f constant:0],
+                                       @"bottomFirstView":[NSLayoutConstraint constraintWithItem:self.firstView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.sencondView attribute:NSLayoutAttributeTop multiplier:1.f constant:-10.f],
+                                       @"trailingSecondView":[NSLayoutConstraint constraintWithItem:self.sencondView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeTrailing multiplier:1.f constant:-10.f],
+                                       @"bottomSecondView":[NSLayoutConstraint constraintWithItem:self.sencondView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1.f constant:-10.f]
+                                       };
+    [NSLayoutConstraint activateConstraints:[self.sharedConstraintsForViews allValues]];
     
-    self.horizontalSizeClassCompactConstraints = @[];
+    //Constarints for horizontal sizeClass:Regular
+    self.horizontalSizeClassRegularConstraints = @{@"leadingSecondView":[NSLayoutConstraint constraintWithItem:self.sencondView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.firstView attribute:NSLayoutAttributeTrailing multiplier:1.f constant:10.f],
+                                                   @"topSecondToFirst":[NSLayoutConstraint constraintWithItem:self.sencondView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.firstView attribute:NSLayoutAttributeTop multiplier:1.f constant:0]
+                                                   };
     
-    [self setSharedConstraintsForViews:@[bottomFirstView, [self.firstView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10], [self.firstView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:10], [self.firstView.centerXAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.centerXAnchor], [self.sencondView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:10], [self.sencondView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-10], [self.sencondView.centerXAnchor constraintEqualToAnchor:self.firstView.centerXAnchor], equalHeight]];
-    [NSLayoutConstraint activateConstraints:self.sharedConstraintsForViews];
     
     [self setConstraintsForButtons:@[[self.firstBttn.centerXAnchor       constraintEqualToAnchor:self.firstView.centerXAnchor]
         ,[self.firstBttn.centerYAnchor constraintEqualToAnchor:self.firstView.centerYAnchor],[self.secondBttn.centerXAnchor constraintEqualToAnchor:self.sencondView.centerXAnchor]
                 ,[self.secondBttn.centerYAnchor constraintEqualToAnchor:self.sencondView.centerYAnchor]]];
     [NSLayoutConstraint activateConstraints:self.constraintsForButtons];
     
-    
     [self.firstBttn addTarget:self action:@selector(firstTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.secondBttn addTarget:self action:@selector(secondBttnTapped:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [self sizeClassDidChange];
+}
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    NSLog(@"Old UI %lu", [UIApplication sharedApplication].statusBarOrientation);
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];//NSLog(@"Old UI");
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        NSLog(@"UI Will Change");
-        [self sizeClassDidChange];
+        [self resetProperties];//NSLog(@"UI Will Change");
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        NSLog(@"UI Did Change");
+//        NSLog(@"UI Did Change");
     }];
 }
     
     
 - (void)firstTapped:(id)sender {
-    NSLog(@"Tapped");
-    [self.sharedConstraintsForViews lastObject].constant = 300;
+    [self setFirstBttnIsTapped:YES];
+    [self increaseConstantHeightOrWidthConstraint];//NSLog(@"Tapped");
 }
 
 - (void)secondBttnTapped:(id)sender {
-    NSLog(@"Tapped2");
-    [self.sharedConstraintsForViews lastObject].constant = -300;
+    [self setSecondBttnIsTapped:YES];
+    [self increaseConstantHeightOrWidthConstraint];//NSLog(@"Tapped2");
 }
 
 

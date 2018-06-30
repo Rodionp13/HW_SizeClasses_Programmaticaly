@@ -26,6 +26,15 @@
     [self resetProperties];
 }
 
+- (void) resetProperties {
+    [[self.sharedConstraintsForViews objectForKey:@"equalHeight"] setConstant:0];
+    [[self.sharedConstraintsForViews objectForKey:@"equalWidth"] setConstant:0];
+    [self setFirstBttnIsTapped:NO];
+    [self setSecondBttnIsTapped:NO];
+    [self.firstBttn setEnabled:YES];
+    [self.secondBttn setEnabled:YES];
+}
+
 - (void) increaseConstantHeightOrWidthConstraint {
     CGFloat constatnH = self.view.frame.size.height * 0.3;
     CGFloat constantW = self.view.frame.size.width * 0.3;
@@ -50,10 +59,10 @@
     [UIView animateWithDuration:0.5f animations:^{
         [self.view layoutIfNeeded];
     }];
-    [self firstOrSecondBttnsIsTapped];
+    [self firstOrSecondBttnIsTapped];
 }
 
-- (void) firstOrSecondBttnsIsTapped {
+- (void) firstOrSecondBttnIsTapped {
     if(self.firstBttnIsTapped == YES && self.secondBttnIsTapped == NO) {
         [self.firstBttn setEnabled:NO];
         [self setFirstBttnIsTapped:NO];
@@ -65,14 +74,5 @@
         [self setFirstBttnIsTapped:YES];
         [self.firstBttn setEnabled:YES];
     }
-}
-
-- (void) resetProperties {
-    [[self.sharedConstraintsForViews objectForKey:@"equalHeight"] setConstant:0];
-    [[self.sharedConstraintsForViews objectForKey:@"equalWidth"] setConstant:0];
-    [self setFirstBttnIsTapped:NO];
-    [self setSecondBttnIsTapped:NO];
-    [self.firstBttn setEnabled:YES];
-    [self.secondBttn setEnabled:YES];
 }
 @end

@@ -17,65 +17,8 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mUL-TT-1I5">
-                                <rect key="frame" x="10" y="30" width="394" height="343"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.55216794680000003" blue="0.2901506941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vY-T5-lif">
-                                <rect key="frame" x="10" y="383" width="394" height="343"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.55216794680000003" blue="0.2901506941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6vY-T5-lif" secondAttribute="trailing" constant="10" id="20F-jS-HcQ"/>
-                            <constraint firstItem="mUL-TT-1I5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="7cJ-HP-8Ao"/>
-                            <constraint firstItem="mUL-TT-1I5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="8HZ-cR-GW7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mUL-TT-1I5" secondAttribute="bottom" constant="10" id="Asq-CF-Fwu"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="width" secondItem="mUL-TT-1I5" secondAttribute="width" id="Mbx-0z-DC4"/>
-                            <constraint firstItem="mUL-TT-1I5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NVP-RY-zCA"/>
-                            <constraint firstItem="mUL-TT-1I5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ph0-wV-kz9"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="aNX-an-IpK"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="centerY" secondItem="mUL-TT-1I5" secondAttribute="centerY" id="bR4-vP-qig"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6vY-T5-lif" secondAttribute="bottom" constant="10" id="bZq-xx-ECw"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="centerX" secondItem="mUL-TT-1I5" secondAttribute="centerX" id="d9P-Ht-ufi"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="top" secondItem="mUL-TT-1I5" secondAttribute="bottom" constant="10" id="dBc-Ao-b47"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="m7d-iw-vNh"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="centerY" secondItem="mUL-TT-1I5" secondAttribute="centerY" id="pU4-jX-CSz"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="leading" secondItem="mUL-TT-1I5" secondAttribute="trailing" constant="10" id="tHM-4u-9bw"/>
-                            <constraint firstItem="6vY-T5-lif" firstAttribute="height" secondItem="mUL-TT-1I5" secondAttribute="height" id="uFL-kf-cad"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="20F-jS-HcQ"/>
-                                <exclude reference="Asq-CF-Fwu"/>
-                                <exclude reference="NVP-RY-zCA"/>
-                                <exclude reference="Mbx-0z-DC4"/>
-                                <exclude reference="aNX-an-IpK"/>
-                                <exclude reference="bR4-vP-qig"/>
-                                <exclude reference="pU4-jX-CSz"/>
-                                <exclude reference="tHM-4u-9bw"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="20F-jS-HcQ"/>
-                                <include reference="Asq-CF-Fwu"/>
-                                <exclude reference="NVP-RY-zCA"/>
-                                <exclude reference="Ph0-wV-kz9"/>
-                                <include reference="Mbx-0z-DC4"/>
-                                <include reference="aNX-an-IpK"/>
-                                <include reference="bR4-vP-qig"/>
-                                <exclude reference="d9P-Ht-ufi"/>
-                                <exclude reference="dBc-Ao-b47"/>
-                                <exclude reference="m7d-iw-vNh"/>
-                                <include reference="pU4-jX-CSz"/>
-                                <include reference="tHM-4u-9bw"/>
-                                <exclude reference="uFL-kf-cad"/>
-                            </mask>
-                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
